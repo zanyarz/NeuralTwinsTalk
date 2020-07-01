@@ -92,13 +92,8 @@ This code also involve the implementation of constraint beam search proposed by 
 Head to `data/README.md`, and prepare the data for training and evaluation.
 
 ### Pretrained model
-| Task | Dataset | Backend | Batch size | Link  |
-| ---- | :----:| :----:| :----:|:----:|
-| Standard image captioning | COCO | Res-101 | 100 | [Pre-trained Model](https://www.dropbox.com/s/6buajkxm9oed1jp/coco_nbt_1024.tar.gz?dl=0) |
-| Standard image captioning | Flickr30k | Res-101 | 50 | [Pre-trained Model](https://www.dropbox.com/s/cirzj1b2jul6yzx/flickr30k_nbt_1024.tar.gz?dl=0) |
-| Robust image captioning | COCO | Res-101 | 100 | [Pre-trained Model](https://www.dropbox.com/s/sxuodvob0ftesm9/robust_coco_nbt_1024.tar.gz?dl=0) |
-| Novel object captioning | COCO | Res-101 | 100 | [Pre-trained Model](https://www.dropbox.com/s/b7i6vx5pf98540l/noc_coco_nbt_1024.tar.gz?dl=0) |
 
+Pre-trained models will be available here soon. Stay tuned.
 
 ### Standard Image Captioning
 ##### Training (COCO)
