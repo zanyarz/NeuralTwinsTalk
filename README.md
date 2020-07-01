@@ -26,7 +26,12 @@ inside bash when in data folder, and then:
 ```shell
 mv neuraltwinstalk/data/coco_2014.sh .
 ```
-and then run the coco_2014.sh with either bash.
+
+and then run the coco_2014.sh with bash:
+
+```shell
+sh coco_2014.sh
+```
 
 Declare two environment variables:
 
