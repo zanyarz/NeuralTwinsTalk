@@ -1,6 +1,6 @@
 # Neural Baby Talk
 
-![teaser results](demo/img1.png)
+![teaser results](fig1.pdf)
 
 
 ## Docker Setup
