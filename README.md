@@ -11,7 +11,7 @@ This repository contains a Dockerfile for setting up the docker container for CO
 the following command from the project root:
 
 ```shell
-docker build -t nbt .
+docker build -t ntt .
 ```
 
 Before running the container, you need to get COCO dataset downloaded and kept somewhere in your filesystem.
@@ -39,7 +39,7 @@ These directories will be attached as "volumes" to our docker container for Neur
 nvidia-docker run --name ntt_container -it \
      -v $COCO_I:/workspace/neuraltwinstalk/data/coco/images \
      -v $COCO_A:/workspace/neuraltwinstalk/data/coco/annotations \
-     --shm-size 16G -p 8888:8888 nbt /bin/bash
+     --shm-size 16G -p 8888:8888 ntt /bin/bash
 ```
 
 Ideally, shared memory size (`--shm-size`) of 16GB would be enough. Tune it according to your requirements / machine specifications.
@@ -48,15 +48,14 @@ Ideally, shared memory size (`--shm-size`) of 16GB would be enough. Tune it acco
 The container would expose port 8888, which can be used to host tensorboard visualizations.
 
 ```shell
-docker container cp nbt_container:workspace/neuraltwinstalk/save /path/to/local/filesystem/save
+docker container cp ntt_container:workspace/neuraltwinstalk/save /path/to/local/filesystem/save
 ```
 
 Skip directly to **Training and Evaluation** section to execute specified commands within the container.
 
 
-## requirement
+## Requirements
 
-Inference:
 - Python 3.7
 - [pytorch](http://pytorch.org/) : pytorch:0.4-cuda9-cudnn7-devel
 - Other requirements are handled by DockerFile.
@@ -64,6 +63,12 @@ Inference:
 ## Training and Evaluation
 ### Data Preparation
 All data is prepared and ready inside [data.zip](https://drive.google.com/file/d/1265uL4btDgGRGqExR4s3kANBUWGDs9Fv/view).
+
+Next, go to prepro folder with bash and execute the following command: (This downloads the Stanford-corenlp, the version we need)
+
+```shell
+sh download_scnlp.sh
+```
 
 ### Pretrained model
 
@@ -78,10 +83,10 @@ First, modify the cofig file `cfgs/normal_coco_res101.yml` with the correct file
 python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True
 ```
 ##### Evaluation (COCO)
-Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
+Train the model or Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
 ```
-python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/coco_nbt_1024 --mGPUs True --glove_6B_300 True
+python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/normal_coco_1024_adam --mGPUs True --glove_6B_300 True
 ```
 
 ##### Training (Flickr30k)
@@ -92,10 +97,10 @@ python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 80 --cuda T
 ```
 
 ##### Evaluation (Flickr30k)
-Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
+Train the model or Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
 ```
-python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/flickr30k_nbt_1024 --mGPUs True --glove_6B_300 True
+python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/normal_flickr30k_1024_adam --mGPUs True --glove_6B_300 True
 ```
 
 ### Robust Image Captioning
@@ -107,25 +112,24 @@ Modify the cofig file `cfgs/normal_flickr_res101.yml` with the correct file path
 python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True
 ```
 ##### Evaluation (robust-coco)
-Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
+Train the model or Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
 ```
-python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/ --mGPUs True --glove_6B_300 Truerobust_coco_nbt_1024
+python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/robust_coco_1024 --mGPUs True --glove_6B_300 True
 ```
 
 ### Novel Object Captioning
 
 ##### Training
-Modify the cofig file `cfgs/noc_coco_res101.yml` with the correct file path.
 
 ```
 python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True
 ```
 ##### Evaluation (noc-coco)
-Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
+Train the model or Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
 ```
-python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/ noc_coco_nbt_1024 --mGPUs True --glove_6B_300 True
+python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/noc_coco_1024_adam --mGPUs True --glove_6B_300 True
 ```
 
 ### Multi-GPU Training
@@ -136,7 +140,7 @@ For multiple GPU training simply add `--mGPUs Ture` in the command when training
 For Karpathy's split on COCO you can run the following:
 
 ```
-python demo.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/coco_nbt_1024 --mGPUs True --glove_6B_300 True
+python demo.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/normal_coco_1024_adam4 --mGPUs True --glove_6B_300 True
 ```
 
 For other splits, replace the main.py with demo.py in the evaluation commands.
