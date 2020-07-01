@@ -142,25 +142,24 @@ python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True -
 ```
 
 ### Multi-GPU Training
-This codebase also support training with multiple GPU. To enable this feature, simply add `--mGPUs Ture` in the commnad.
+For multiple GPU training simply add `--mGPUs Ture` in the command when training the model.
 
-### Self-Critic Training and Fine-Tuning CNN
+%### Self-Critical Training and Fine-Tuning CNN
 
-This codebase also support self-critic training and fine-tuning CNN. You are welcome to try this part and upload your trained model to the repo!
+%This codebase also support self-critic training and fine-tuning CNN. You are welcome to try this part and upload your trained model to the repo!
 
-## More Visualization Results
-![teaser results](demo/img2.png)
+%## More Visualization Results
 
-## Reference
-If you use this code as part of any published research, please acknowledge the following paper
-
-```
-@inproceedings{Lu2018Neural,
-author = {Lu, Jiasen and Yang, Jianwei and Batra, Dhruv and Parikh, Devi},
-title = {Neural Baby Talk},
-booktitle = {CVPR},
-year = {2018}
-}
-```
+%## Reference
+%If you use this code as part of any published research, please acknowledge the following paper
+%
+%```
+%@inproceedings{Lu2018Neural,
+%author = {Lu, Jiasen and Yang, Jianwei and Batra, Dhruv and Parikh, Devi},
+%title = {Neural Baby Talk},
+%booktitle = {CVPR},
+%year = {2018}
+%}
+%```
 ## Acknowledgement
-We thank Ruotian Luo for his [self-critical.pytorch](https://github.com/ruotianluo/self-critical.pytorch) repo. 
+We thank Jiasen Lou et al. for [NBT] (https://github.com/jiasenlu/NeuralBabyTalk) repo and Ruotian Luo for his [self-critical.pytorch](https://github.com/ruotianluo/self-critical.pytorch) repo. 
