@@ -2,6 +2,10 @@
 
 ![teaser results](Demo.jpg)
 
+## Introduction
+We provide training and evaluation for both the NBT model (Jiasen Lu et al. CVPR 2018) and NTT model (Zohourianshahzadi & Kalita). 
+We also provide the ability to train with BERT Embeddings, the original embedding used in experiences in the paper is Glove_6B_300.
+Feel free to train the models with BERT embeddings as well. 
 
 ## Docker Setup
 First download the repository and download and unzip the [data.zip](https://drive.google.com/file/d/1265uL4btDgGRGqExR4s3kANBUWGDs9Fv/view) 
