@@ -158,4 +158,4 @@ python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True -
 For multiple GPU training simply add `--mGPUs Ture` in the command when training the model.
 
 ## Acknowledgement
-We thank Jiasen Lou et al. for [NBT](https://github.com/jiasenlu/NeuralBabyTalk) repo and Ruotian Luo for his [self-critical.pytorch](https://github.com/ruotianluo/self-critical.pytorch) repo. 
+We thank Jiasen Lu et al. for [NBT](https://github.com/jiasenlu/NeuralBabyTalk) repo and Ruotian Luo for his [self-critical.pytorch](https://github.com/ruotianluo/self-critical.pytorch) repo. 
