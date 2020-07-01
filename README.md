@@ -38,17 +38,17 @@ These directories will be attached as "volumes" to our docker container for Neur
 ```shell
 nvidia-docker run --name ntt_container -it \
      -v $COCO_I:/workspace/neuraltwinstalk/data/coco/images \
-     -v $COCO_ANNOTATIONS:/workspace/neuraltwinstalk/data/coco/annotations \
+     -v $COCO_A:/workspace/neuraltwinstalk/data/coco/annotations \
      --shm-size 16G -p 8888:8888 nbt /bin/bash
 ```
 
 Ideally, shared memory size (`--shm-size`) of 16GB would be enough. Tune it according to your requirements / machine specifications.
 
-**Saved Checkpoints:** All checkpoints will be saved in `/workspace/neuralbabytalk/save`. From outside the container, execute this to get your checkpoints from this container into the main filesystem:
+**Saved Checkpoints:** All checkpoints will be saved in `/workspace/neuraltwinstalk/save`. From outside the container, execute this to get your checkpoints from this container into the main filesystem:
 The container would expose port 8888, which can be used to host tensorboard visualizations.
 
 ```shell
-docker container cp nbt_container:workspace/neuralbabytalk/save /path/to/local/filesystem/save
+docker container cp nbt_container:workspace/neuraltwinstalk/save /path/to/local/filesystem/save
 ```
 
 Skip directly to **Training and Evaluation** section to execute specified commands within the container.
@@ -57,27 +57,12 @@ Skip directly to **Training and Evaluation** section to execute specified comman
 ## requirement
 
 Inference:
-
-- [pytorch](http://pytorch.org/)
-- [torchvision](https://github.com/pytorch/vision)
-- [torchtext](https://github.com/pytorch/text)
-
-Data Preparation:
-
-- [stanford-corenlp-wrapper](https://github.com/Lynten/stanford-corenlp)
-- [stanford-corenlp](https://stanfordnlp.github.io/CoreNLP/)
-
-Evaluation:
-
-- [coco-caption](https://github.com/jiasenlu/coco-caption): Download the modified version of coco-caption and put it under `tools/`
+- Python 3.7
+- [pytorch](http://pytorch.org/) : pytorch:0.4-cuda9-cudnn7-devel
+- Other requirements are handled by DockerFile.
 
 
-## Demo
-
-#### Without detection bbox
-
-
-#### With detection bbox
+## Demo With detection bbox
 
 #### Constraint beam search
 This code also involve the implementation of constraint beam search proposed by Peter Anderson. I'm not sure my impmentation is 100% correct, but it works well in conjuction with neural baby talk code. You can refer to [this](http://users.cecs.anu.edu.au/~sgould/papers/emnlp17-constrained-beam-search.pdf) paper for more details. To enable CBS while decoding, please set the following flags:
@@ -101,27 +86,27 @@ Pre-trained models will be available here soon. Stay tuned.
 First, modify the cofig file `cfgs/normal_coco_res101.yml` with the correct file path.
 
 ```
-python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30
+python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True
 ```
 ##### Evaluation (COCO)
 Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
 ```
-python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/coco_nbt_1024
+python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/ --mGPUs True --glove_6B_300 Truecoco_nbt_1024
 ```
 
 ##### Training (Flickr30k)
 Modify the cofig file `cfgs/normal_flickr_res101.yml` with the correct file path.
 
 ```
-python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30
+python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 80 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True
 ```
 
 ##### Evaluation (Flickr30k)
 Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
 ```
-python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/flickr30k_nbt_1024
+python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/flickr30k_nbt_1024 --mGPUs True --glove_6B_300 True
 ```
 
 ### Robust Image Captioning
@@ -130,13 +115,13 @@ python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 20 --cuda T
 Modify the cofig file `cfgs/normal_flickr_res101.yml` with the correct file path.
 
 ```
-python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30
+python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True
 ```
 ##### Evaluation (robust-coco)
 Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
 ```
-python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/robust_coco_nbt_1024
+python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/ --mGPUs True --glove_6B_300 Truerobust_coco_nbt_1024
 ```
 
 ### Novel Object Captioning
@@ -145,13 +130,13 @@ python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num
 Modify the cofig file `cfgs/noc_coco_res101.yml` with the correct file path.
 
 ```
-python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30
+python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True
 ```
 ##### Evaluation (noc-coco)
 Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
 ```
-python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/noc_coco_nbt_1024
+python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/ noc_coco_nbt_1024 --mGPUs True --glove_6B_300 True
 ```
 
 ### Multi-GPU Training

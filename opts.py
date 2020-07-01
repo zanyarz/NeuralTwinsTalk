@@ -29,7 +29,7 @@ def parse_opt():
                     default=10, type=int)
     parser.add_argument('--cuda', type=bool, default=True,
                     help='whether use cuda')
-    parser.add_argument('--mGPUs', type=bool, default=False,
+    parser.add_argument('--mGPUs', type=bool, default=True,
                     help='whether use multiple GPUs')
     parser.add_argument('--cached_tokens', type=str, default='dataset/coco-train-idxs',
                     help='Cached token file for calculating cider score during self critical training.')
@@ -37,7 +37,7 @@ def parse_opt():
     # Model settings
     parser.add_argument('--rnn_size', type=int, default=1024,
                     help='size of the rnn in number of hidden nodes in each layer')
-    parser.add_argument('--num_layers', type=int, default=2,
+    parser.add_argument('--num_layers', type=int, default=1,
                     help='number of layers in the RNN')
     parser.add_argument('--rnn_type', type=str, default='lstm',
                     help='rnn, gru, or lstm')
@@ -101,7 +101,7 @@ def parse_opt():
     # Optimization: for the CNN
     parser.add_argument('--finetune_cnn', type=bool, default='True',
                     help='finetune CNN')
-    parser.add_argument('--fixed_block', type=float, default=0,
+    parser.add_argument('--fixed_block', type=float, default=3,
                     help='fixed cnn block when training. [0-4] \
                             0:finetune all block, 4: fix all block')
     parser.add_argument('--cnn_optim', type=str, default='adam',
