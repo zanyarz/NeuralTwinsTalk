@@ -65,7 +65,7 @@ Skip directly to **Training and Evaluation** section to execute specified comman
 - [pytorch](http://pytorch.org/) : pytorch:0.4-cuda9-cudnn7-devel
 - Other requirements are handled by DockerFile.
 
-## Training and Evaluation
+## Training and Evaluation (NTT)
 ### Data Preparation
 All data is prepared and ready inside [data.zip](https://drive.google.com/file/d/1265uL4btDgGRGqExR4s3kANBUWGDs9Fv/view).
 
@@ -87,6 +87,7 @@ First, modify the cofig file `cfgs/normal_coco_res101.yml` with the correct file
 ```
 python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True
 ```
+
 ##### Evaluation (COCO)
 Train the model or Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
@@ -135,6 +136,79 @@ Train the model or Download Pre-trained model. Extract the tar.zip file and put 
 
 ```
 python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/noc_coco_1024_adam --mGPUs True --glove_6B_300 True
+```
+
+## Training and Evaluation (NBT)
+### Data Preparation
+All data is prepared and ready inside [data.zip](https://drive.google.com/file/d/1265uL4btDgGRGqExR4s3kANBUWGDs9Fv/view).
+
+Next, go to prepro folder with bash and execute the following command: (This downloads the Stanford-corenlp, the version we need)
+
+```shell
+sh download_scnlp.sh
+```
+
+### Pretrained model
+
+Pre-trained models will be available here soon. Stay tuned.
+
+### Standard Image Captioning
+##### Training (COCO)
+
+First, modify the cofig file `cfgs/normal_coco_res101.yml` with the correct file path.
+
+```
+python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True --att_model topdown
+```
+
+##### Evaluation (COCO)
+Train the model or Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
+
+```
+python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/normal_coco_1024_adam --mGPUs True --glove_6B_300 True --att_model topdown
+```
+
+##### Training (Flickr30k)
+Modify the cofig file `cfgs/normal_flickr_res101.yml` with the correct file path.
+
+```
+python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 80 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True --att_model topdown
+```
+
+##### Evaluation (Flickr30k)
+Train the model or Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
+
+```
+python main.py --path_opt cfgs/normal_flickr_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/normal_flickr30k_1024_adam --mGPUs True --glove_6B_300 True --att_model topdown
+```
+
+### Robust Image Captioning
+
+##### Training
+Modify the cofig file `cfgs/normal_flickr_res101.yml` with the correct file path.
+
+```
+python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True --att_model topdown
+```
+##### Evaluation (robust-coco)
+Train the model or Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
+
+```
+python main.py --path_opt cfgs/robust_coco.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/robust_coco_1024 --mGPUs True --glove_6B_300 True --att_model topdown
+```
+
+### Novel Object Captioning
+
+##### Training
+
+```
+python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --glove_6B_300 True --att_model topdown
+```
+##### Evaluation (noc-coco)
+Train the model or Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
+
+```
+python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/noc_coco_1024_adam --mGPUs True --glove_6B_300 True --att_model topdown
 ```
 
 ### Multi-GPU Training
