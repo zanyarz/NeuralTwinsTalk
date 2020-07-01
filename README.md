@@ -61,17 +61,6 @@ Inference:
 - [pytorch](http://pytorch.org/) : pytorch:0.4-cuda9-cudnn7-devel
 - Other requirements are handled by DockerFile.
 
-
-## Demo With detection bbox
-
-#### Constraint beam search
-This code also involve the implementation of constraint beam search proposed by Peter Anderson. I'm not sure my impmentation is 100% correct, but it works well in conjuction with neural baby talk code. You can refer to [this](http://users.cecs.anu.edu.au/~sgould/papers/emnlp17-constrained-beam-search.pdf) paper for more details. To enable CBS while decoding, please set the following flags:
-```
---cbs True|False : Whether use the constraint beam search.
---cbs_tag_size 3 : How many detection bboxes do we want to include in the decoded caption.
---cbs_mode all|unqiue|novel : Do we allow the repetive bounding box? `novel` is an option only for novel object detection task.
-```
-
 ## Training and Evaluation
 ### Data Preparation
 Head to `data/README.md`, and prepare the data for training and evaluation.
@@ -92,7 +81,7 @@ python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda Tru
 Download Pre-trained model. Extract the tar.zip file and put it under `save/`.
 
 ```
-python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/ --mGPUs True --glove_6B_300 Truecoco_nbt_1024
+python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/coco_nbt_1024 --mGPUs True --glove_6B_300 True
 ```
 
 ##### Training (Flickr30k)
@@ -141,6 +130,16 @@ python main.py --path_opt cfgs/noc_coco_res101.yml --batch_size 20 --cuda True -
 
 ### Multi-GPU Training
 For multiple GPU training simply add `--mGPUs Ture` in the command when training the model.
+
+## Demo With detection bbox
+
+For Karpathy's split on COCO you can run the following:
+
+```
+python demo.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --inference_only True --beam_size 3 --start_from save/coco_nbt_1024 --mGPUs True --glove_6B_300 True
+```
+
+For other splits, replace the main.py with demo.py in the evaluation commands.
 
 ## Acknowledgement
 We thank Jiasen Lu et al. for [NBT](https://github.com/jiasenlu/NeuralBabyTalk) repo and Ruotian Luo for his [self-critical.pytorch](https://github.com/ruotianluo/self-critical.pytorch) repo. 
