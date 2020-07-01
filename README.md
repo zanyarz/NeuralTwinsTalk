@@ -63,7 +63,7 @@ Inference:
 
 ## Training and Evaluation
 ### Data Preparation
-Head to `data/README.md`, and prepare the data for training and evaluation.
+All data is prepared and ready inside [data.zip](https://drive.google.com/file/d/1265uL4btDgGRGqExR4s3kANBUWGDs9Fv/view).
 
 ### Pretrained model
 
