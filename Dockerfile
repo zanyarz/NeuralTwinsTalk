@@ -1,7 +1,7 @@
 
 FROM pytorch/pytorch:0.4-cuda9-cudnn7-devel
 
-COPY . /workspace/neuralbabytalk
+COPY . /workspace/neuraltwinstalk
 
 # ----------------------------------------------------------------------------
 # -- install apt and pip dependencies
@@ -39,57 +39,36 @@ RUN pip install Cython && pip install h5py \
     torchtext \
     tqdm && python -c "import nltk; nltk.download('punkt')"
 
-
-# ----------------------------------------------------------------------------
-# -- download pretrained imagenet weights for resnet-101
-# ----------------------------------------------------------------------------
-
-#RUN cd /workspace/neuralbabytalk/data/ && \
-#    wget --quiet https://www.dropbox.com/sh/67fc8n6ddo3qp47/AAACkO4QntI0RPvYic5voWHFa/resnet101.pth
-
-
 # ----------------------------------------------------------------------------
 # -- download Karpathy's preprocessed captions datasets and corenlp jar
 # ----------------------------------------------------------------------------
 
-RUN cd /workspace/neuralbabytalk/data && \
+RUN cd /workspace/neuraltwinstalk/data && \
     wget --quiet http://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip && \
     unzip caption_datasets.zip && \
     mv dataset_coco.json coco/ && \
     mv dataset_flickr30k.json flickr30k/ && \
     rm caption_datasets.zip dataset_flickr8k.json
 
-RUN cd /workspace/neuralbabytalk/prepro && \
+RUN cd /workspace/neuraltwinstalk/prepro && \
     wget --quiet https://nlp.stanford.edu/software/stanford-corenlp-full-2017-06-09.zip && \
     unzip stanford-corenlp-full-2017-06-09.zip && \
     rm stanford-corenlp-full-2017-06-09.zip
 
-RUN cd /workspace/neuralbabytalk/tools/coco-caption && \
+RUN cd /workspace/neuraltwinstalk/tools/coco-caption && \
     sh get_stanford_models.sh
 
 # ----------------------------------------------------------------------------
 # -- download preprocessed COCO detection output HDF file and pretrained model
 # ----------------------------------------------------------------------------
 
-RUN cd /workspace/neuralbabytalk/data/coco && \
+RUN cd /workspace/neuraltwinstalk/data/coco && \
     wget --quiet https://www.dropbox.com/s/2gzo4ops5gbjx5h/coco_detection.h5.tar.gz && \
     tar -xzvf coco_detection.h5.tar.gz && \
     rm coco_detection.h5.tar.gz
 
-#RUN mkdir -p /workspace/neuralbabytalk/save && \
-#    cd /workspace/neuralbabytalk/save && \
-#    wget --quiet https://www.dropbox.com/s/6buajkxm9oed1jp/coco_nbt_1024.tar.gz && \
-#    tar -xzvf coco_nbt_1024.tar.gz && \
-#    rm coco_nbt_1024.tar.gz \
-#    wget --quiet www.dropbox.com/s/b7i6vx5pf98540l/noc_coco_nbt_1024.tar.gz && \
-#    tar -xzvf noc_coco_nbt_1024.tar.gz && \
-#    rm noc_coco_nbt_1024.tar.gz \
-#    wget --quiet www.dropbox.com/s/sxuodvob0ftesm9/robust_coco_nbt_1024.tar.gz && \
-#    tar -xzvf robust_coco_nbt_1024.tar.gz && \
-#    rm robust_coco_nbt_1024.tar.gz
 
-
-WORKDIR /workspace/neuralbabytalk
+WORKDIR /workspace/neuraltwinstalk
 RUN python prepro/prepro_dic_coco.py \
     --input_json data/coco/dataset_coco.json \
     --split normal \

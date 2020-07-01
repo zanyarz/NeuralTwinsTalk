@@ -15,6 +15,19 @@ docker build -t nbt .
 ```
 
 Before running the container, you need to get COCO dataset downloaded and kept somewhere in your filesystem.
+In order to do this, go to data folder, copy coco_2014.sh into a directory that is not a subset of project directory. For instance, inside bash do:
+
+```shell
+cd ../..
+```
+
+inside bash when in data folder, and then:
+
+```shell
+mv neuraltwinstalk/data/coco_2014.sh .
+```
+and then run the coco_2014.sh with either bash.
+
 Declare two environment variables:
 
 1. `$COCO_I`: path to a directory with sub-directories of images as `train2014`, `val2014`, `test2015`, etc...
