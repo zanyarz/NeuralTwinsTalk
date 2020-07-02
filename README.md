@@ -4,10 +4,8 @@
 
 ## Introduction
 We provide training and evaluation for both the NBT model (Jiasen Lu et al. CVPR 2018) and NTT model (Zohourianshahzadi & Kalita). 
-We also provide the ability to train with BERT Embeddings, the original embedding used in experiences in the paper is Glove_6B_300.
-Feel free to train the models with BERT embeddings as well. 
 
-## Docker Setup
+## Project Environment Setup
 First download the repository and download and unzip the [data.zip](https://drive.google.com/file/d/1265uL4btDgGRGqExR4s3kANBUWGDs9Fv/view) 
 and [tools.zip](https://drive.google.com/file/d/1reAJwPnY6QTi5b5ixmA29uPrwbF_RDT5/view) inside the project directory.
 
@@ -227,6 +225,14 @@ python demo.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda Tru
 ```
 
 For other splits, replace the main.py with demo.py in the evaluation commands.
+
+## BERT Embeddings
+We also provide the ability to train with BERT Embeddings, the original embedding used in experiences in the paper is Glove_6B_300.
+Feel free to train the models with BERT embeddings as well. In order to train the models with BERT embeddings, simply replace the --glove_6B_300 in the commands to --bert_base_768. Similar to the following:
+
+```
+python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda True --num_workers 20 --max_epoch 30 --mGPUs True --bert_base_768 True
+```
 
 ## Acknowledgement
 We thank Jiasen Lu et al. for [NBT](https://github.com/jiasenlu/NeuralBabyTalk) repo and Ruotian Luo for his [self-critical.pytorch](https://github.com/ruotianluo/self-critical.pytorch) repo. 
