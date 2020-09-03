@@ -3,7 +3,7 @@
 ![teaser results](Demo.jpg)
 
 ## Introduction
-We provide training and evaluation for both the NBT model (Jiasen Lu et al. CVPR 2018) and NTT model (Zohourianshahzadi & Kalita). 
+We provide training and evaluation for both the NTT model (Zohourianshahzadi & Kalita, IEEE HCCAI 2020) and the NBT model (Jiasen Lu et al. CVPR 2018). 
 
 ## Project Environment Setup
 First download the repository and download and unzip the [data.zip](https://drive.google.com/file/d/1265uL4btDgGRGqExR4s3kANBUWGDs9Fv/view) 
