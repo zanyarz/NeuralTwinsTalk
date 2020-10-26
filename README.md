@@ -236,3 +236,7 @@ python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda Tru
 
 ## Acknowledgement
 We thank Jiasen Lu et al. for [NBT](https://github.com/jiasenlu/NeuralBabyTalk) repo and Ruotian Luo for his [self-critical.pytorch](https://github.com/ruotianluo/self-critical.pytorch) repo. 
+
+## Signature
+
+This work was done by a magician from pars.
