@@ -240,5 +240,11 @@ We thank Jiasen Lu et al. for [NBT](https://github.com/jiasenlu/NeuralBabyTalk) 
 ## Citation
 If you use this code in your project, please cite the following paper.
 ```
-@INPROCEEDINGS{9230394,  author={Z. {Zohourianshahzadi} and J. K. {Kalita}},  booktitle={2020 IEEE International Conference on Humanized Computing and Communication with Artificial Intelligence (HCCAI)},   title={Neural Twins Talk},   year={2020},  volume={},  number={},  pages={17-24},  doi={10.1109/HCCAI49649.2020.00009}}
+@INPROCEEDINGS{9230394,
+author={Z. {Zohourianshahzadi} and J. K. {Kalita}},
+booktitle={2020 IEEE International Conference on Humanized Computing and Communication with Artificial Intelligence (HCCAI)},
+title={Neural Twins Talk},
+year={2020},
+pages={17-24},
+doi={10.1109/HCCAI49649.2020.00009}}
 ```
