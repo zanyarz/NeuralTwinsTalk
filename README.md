@@ -236,3 +236,9 @@ python main.py --path_opt cfgs/normal_coco_res101.yml --batch_size 20 --cuda Tru
 
 ## Acknowledgement
 We thank Jiasen Lu et al. for [NBT](https://github.com/jiasenlu/NeuralBabyTalk) repo and Ruotian Luo for his [self-critical.pytorch](https://github.com/ruotianluo/self-critical.pytorch) repo. 
+
+## Citation
+If you use this code in your project, please cite the following paper.
+```
+@INPROCEEDINGS{9230394,  author={Z. {Zohourianshahzadi} and J. K. {Kalita}},  booktitle={2020 IEEE International Conference on Humanized Computing and Communication with Artificial Intelligence (HCCAI)},   title={Neural Twins Talk},   year={2020},  volume={},  number={},  pages={17-24},  doi={10.1109/HCCAI49649.2020.00009}}
+```
