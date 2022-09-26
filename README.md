@@ -2,6 +2,11 @@
 
 ![teaser results](Demo.jpg)
 
+## Update
+To run experiments with NTTUD.v1, NTTUD.v2 in "Neural Twins Talk and Alternative Calculations" refer to [ZoDIAC](https://github.com/zanyarz/zodiac) repo.
+Run the experiments in the same environment you use for running experiments for ZoDIAC.
+You will also need to modify the config file for the run accordingly.
+
 ## Introduction
 We provide training and evaluation for both the NTT model (Zohourianshahzadi & Kalita, IEEE HCCAI 2020) and the NBT model (Jiasen Lu et al. IEEE CVPR 2018). 
 
